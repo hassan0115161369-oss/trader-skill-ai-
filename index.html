@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trader Skill AI — Ultimate Final Edition</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Splash Screen -->
+  <div id="splashScreen" class="splash-screen">
+    <div class="cyber-bull-logo large" aria-hidden="true">
+      <svg viewBox="0 0 120 120" fill="none">
+        <rect x="6" y="6" width="108" height="108" rx="26" stroke="#00BBF9" stroke-width="2.5" fill="#070d19" />
+        <path d="M24 38 C16 24, 24 14, 38 22 C44 26, 48 32, 50 38" stroke="#00F5D4" stroke-width="3.5" stroke-linecap="round" />
+        <path d="M96 38 C104 24, 96 14, 82 22 C76 26, 72 32, 70 38" stroke="#00F5D4" stroke-width="3.5" stroke-linecap="round" />
+        <path d="M36 42 L60 32 L84 42 L78 78 L60 94 L42 78 Z" fill="#0d1b2a" stroke="#00BBF9" stroke-width="2.5" />
+        <circle cx="48" cy="58" r="4" fill="#00F5D4" />
+        <circle cx="72" cy="58" r="4" fill="#00F5D4" />
+        <path d="M52 76 L68 76" stroke="#00F5D4" stroke-width="2.5" stroke-linecap="round" />
+      </svg>
+    </div>
+    <h1 class="brand-title">TRADER SKILL AI</h1>
+    <p class="brand-sub">ULTIMATE FINAL EDITION • AI FINANCIAL INTELLIGENCE</p>
+    <div class="splash-line"></div>
+  </div>
+
+  <!-- Auth Modal / Screen -->
+  <section id="authSection" class="auth-wrapper hidden">
+    <div class="glass-card auth-card">
+      <div class="auth-header">
+        <div class="cyber-bull-logo">
+          <svg viewBox="0 0 120 120" fill="none">
+            <rect x="6" y="6" width="108" height="108" rx="26" stroke="#00BBF9" stroke-width="2.5" fill="#070d19" />
+            <path d="M24 38 C16 24, 24 14, 38 22 L50 38" stroke="#00F5D4" stroke-width="3.5" stroke-linecap="round" />
+            <path d="M96 38 C104 24, 96 14, 82 22 L70 38" stroke="#00F5D4" stroke-width="3.5" stroke-linecap="round" />
+            <path d="M36 42 L60 32 L84 42 L78 78 L60 94 L42 78 Z" fill="#0d1b2a" stroke="#00BBF9" stroke-width="2.5" />
+            <circle cx="48" cy="58" r="4" fill="#00F5D4" />
+            <circle cx="72" cy="58" r="4" fill="#00F5D4" />
+          </svg>
+        </div>
+        <div>
+          <h2>Trader Skill AI</h2>
+          <p class="muted" id="authSubtitle">تسجيل الدخول أو إنشاء حساب محلي آمن</p>
+        </div>
+      </div>
+
+      <div class="tabs">
+        <button id="tabLogin" class="tab-btn active" type="button">دخول</button>
+        <button id="tabRegister" class="tab-btn" type="button">حساب جديد</button>
+      </div>
+
+      <form id="authForm" class="stack-gap">
+        <div id="nameField" class="field hidden">
+          <label for="authName">الاسم الكامل</label>
+          <input id="authName" type="text" placeholder="مثال: أحمد" />
+        </div>
+        <div class="field">
+          <label for="authEmail">البريد الإلكتروني</label>
+          <input id="authEmail" type="email" required placeholder="trader@example.com" />
+        </div>
+        <div class="field">
+          <label for="authPassword">كلمة المرور</label>
+          <input id="authPassword" type="password" required minlength="6" placeholder="••••••••" />
+        </div>
+        <div id="authError" class="alert error hidden"></div>
+        <button id="authSubmitBtn" class="btn primary full-width" type="submit">متابعة</button>
+      </form>
+
+      <div class="auth-footer-note">
+        <span>ملاحظة: تأكيد البريد واستعادة كلمة المرور يتطلبان خادم بريد (SMTP) غير مدمج هنا، والحسابات تُحفظ محلياً في المتصفح فقط.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main App -->
+  <div id="appShell" class="app-shell hidden">
+    <header class="topbar glass-card">
+      <div class="topbar-left">
+        <div class="cyber-bull-logo small">
+          <svg viewBox="0 0 120 120" fill="none">
+            <rect x="6" y="6" width="108" height="108" rx="26" stroke="#00BBF9" stroke-width="3" fill="#070d19" />
+            <circle cx="48" cy="58" r="5" fill="#00F5D4" />
+            <circle cx="72" cy="58" r="5" fill="#00F5D4" />
+            <path d="M34 40 L60 28 L86 40 L78 82 L60 96 L42 82 Z" stroke="#00BBF9" stroke-width="3" />
+          </svg>
+        </div>
+        <div>
+          <span class="app-name">Trader Skill AI</span>
+          <span class="badge neon">ULTIMATE FINAL</span>
+        </div>
+      </div>
+
+      <div class="topbar-status">
+        <span id="connStatusBadge" class="badge neutral">غير متصل</span>
+        <span id="accountModeBadge" class="badge demo">حساب: غير محدد</span>
+        <span id="botStatusBadge" class="badge neutral">الروبوت: متوقف</span>
+      </div>
+
+      <div class="topbar-actions">
+        <button id="langToggleBtn" class="btn ghost" type="button">EN / AR</button>
+        <button id="deleteAccountBtn" class="btn danger-outline" type="button" title="حذف الحساب المحلي">?</button>
+        <button id="logoutBtn" class="btn ghost" type="button">خروج</button>
+      </div>
+    </header>
+
+    <main class="main-grid">
+      <!-- Column 1: Broker Connection, Risk Shield & News Guard -->
+      <section class="glass-card panel">
+        <div class="panel-head">
+          <h2>1. ربط المنصات ودرع المخاطر</h2>
+          <span class="muted small" id="lastTickTime">آخر تحديث: —</span>
+        </div>
+
+        <div class="field">
+          <label for="brokerSelect">المنصة</label>
+          <select id="brokerSelect">
+            <option value="deriv">Deriv (WebSocket API v3 — حقيقي)</option>
+            <option value="binance">Binance (يتطلب خادم توقيع/مفاتيح خارجي)</option>
+            <option value="mt5">MetaTrader 5 (يتطلب جسر/خادم MT5)</option>
+            <option value="quotex">Quotex (لا توجد واجهة API رسمية موثقة)</option>
+          </select>
+        </div>
+
+        <div id="derivConfigBox" class="stack-gap sub-box">
+          <div class="grid-2">
+            <div class="field">
+              <label for="derivAppId">Deriv App ID</label>
+              <input id="derivAppId" type="text" value="1089" />
+            </div>
+            <div class="field">
+              <label for="derivSymbol">الرمز / السوق</label>
+              <input id="derivSymbol" type="text" value="R_100" placeholder="مثال: R_100 أو frxEURUSD" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="derivToken">Deriv API Token (لا يُطلب كلمة مرور الحساب)</label>
+            <input id="derivToken" type="password" placeholder="أدخل Token حساب Demo أو Real" />
+          </div>
+          <div class="row-gap">
+            <button id="connectDerivBtn" class="btn primary" type="button">اتصال بـ Deriv</button>
+            <button id="disconnectDerivBtn" class="btn ghost" type="button">فصل</button>
+          </div>
+        </div>
+
+        <div id="otherBrokerNotice" class="alert warn hidden"></div>
+
+        <hr class="divider" />
+
+        <h3>فصل الحسابات وقفل التداول الحقيقي (Real Lock)</h3>
+        <div class="real-lock-box">
+          <div>
+            <strong>وضع الحساب الحالي: <span id="detectedAccountType">غير متصل</span></strong>
+            <p class="muted small" id="balanceReadout">الرصيد: —</p>
+          </div>
+          <label class="switch-row">
+            <input id="realTradingLockCheckbox" type="checkbox" />
+            <span>فك قفل التداول الحقيقي (Real)</span>
+          </label>
+        </div>
+
+        <hr class="divider" />
+
+        <h3>إدارة المخاطر الآلية (Auto-Risk Shield)</h3>
+        <div class="grid-2">
+          <div class="field">
+            <label for="stakeAmount">قيمة الصفقة / Stake ($)</label>
+            <input id="stakeAmount" type="number" step="0.5" min="0.35" value="1" />
+          </div>
+          <div class="field">
+            <label for="riskPercent">نسبة المخاطرة لكل صفقة (%)</label>
+            <input id="riskPercent" type="number" step="0.5" min="0.1" max="10" value="1" />
+          </div>
+          <div class="field">
+            <label for="maxDailyLoss">حد الخسارة اليومية ($)</label>
+            <input id="maxDailyLoss" type="number" step="1" min="1" value="20" />
+          </div>
+          <div class="field">
+            <label for="dailyTarget">هدف الربح اليومي ($)</label>
+            <input id="dailyTarget" type="number" step="1" min="1" value="30" />
+          </div>
+          <div class="field">
+            <label for="maxConsecutiveLosses">خسائر متتالية قبل التبريد (15 د)</label>
+            <input id="maxConsecutiveLosses" type="number" min="1" max="10" value="3" />
+          </div>
+          <div class="field">
+            <label for="newsGuardMinutes">حارس الأخبار العالية (دقائق قبل/بعد)</label>
+            <input id="newsGuardMinutes" type="number" min="0" max="120" value="15" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="nextHighImpactNewsInput">موعد خبر عالي التأثير قادم (اختياري لاختبار الحارس — ISO أو دقائق من الآن)</label>
+          <input id="nextHighImpactNewsMinutes" type="number" min="0" placeholder="اتركه فارغاً إذا لا يوجد خبر مجدول" />
+        </div>
+      </section>
+
+      <!-- Column 2: Auto-Trading Bot, Strategy & Live Telemetry -->
+      <section class="glass-card panel">
+        <div class="panel-head">
+          <h2>2. روبوت التداول الآلي والتحليل الفني</h2>
+          <span class="badge info" id="shieldStateBadge">درع المخاطر: جاهز</span>
+        </div>
+
+        <div class="kpi-row">
+          <div class="kpi-box">
+            <span class="muted small">السعر اللحظي</span>
+            <strong id="livePrice">—</strong>
+          </div>
+          <div class="kpi-box">
+            <span class="muted small">ربح/خسارة الجلسة</span>
+            <strong id="sessionPnl">0.00</strong>
+          </div>
+          <div class="kpi-box">
+            <span class="muted small">خسائر متتالية</span>
+            <strong id="streakCount">0</strong>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="field">
+            <label for="emaFastPeriod">EMA السريع</label>
+            <input id="emaFastPeriod" type="number" min="2" max="50" value="7" />
+          </div>
+          <div class="field">
+            <label for="emaSlowPeriod">EMA البطيء</label>
+            <input id="emaSlowPeriod" type="number" min="5" max="200" value="21" />
+          </div>
+        </div>
+
+        <div class="row-gap">
+          <button id="startBotBtn" class="btn success" type="button">تشغيل الروبوت</button>
+          <button id="pauseBotBtn" class="btn warn" type="button">إيقاف مؤقت</button>
+          <button id="stopBotBtn" class="btn danger" type="button">إيقاف كامل</button>
+        </div>
+
+        <div class="alert info small">
+          <strong>ملاحظة نزاهة البيانات:</strong> الإشارات هنا تعتمد على تقاطع EMA اللحظي من بيانات السوق الحية فقط بدون اختلاق أخبار أو بيانات حجم (VWAP غير متاح عندما لا يوفّر المصدر الحجم).
+        </div>
+
+        <h3>سجل النشاط والتنفيذ الآلي</h3>
+        <div id="activityLog" class="log-box"></div>
+
+        <h3>سجل الأخطاء والتنبيهات</h3>
+        <div id="errorLog" class="log-box error-log"></div>
+      </section>
+
+      <!-- Column 3: Quick Backtest, Telegram Alerts & Export -->
+      <section class="glass-card panel">
+        <div class="panel-head">
+          <h2>3. الباكتيست السريع، Telegram، والتصدير</h2>
+        </div>
+
+        <h3>اختبار أداء تاريخي سريع (Quick Backtest)</h3>
+        <p class="muted small">يُجرى على الأسعار التاريخية المجمّعة في الجلسة الحالية أو سلسلة أسعار تُدخلها يدوياً (بدون بيانات وهمية مخترعة).</p>
+        <div class="field">
+          <label for="customSeriesInput">سلسلة أسعار للاختبار (مفصولة بفاصلة — اختياري)</label>
+          <input id="customSeriesInput" type="text" placeholder="مثال: 100, 100.4, 100.9, 101.5, 101.1, 102.0" />
+        </div>
+        <button id="runBacktestBtn" class="btn primary full-width" type="button">تشغيل الاختبار التاريخي</button>
+        <div id="backtestResult" class="sub-box small muted">لم يتم تشغيل اختبار بعد.</div>
+
+        <hr class="divider" />
+
+        <h3>إشعارات Telegram الفورية</h3>
+        <div class="field">
+          <label for="tgBotToken">Bot Token</label>
+          <input id="tgBotToken" type="password" placeholder="123456:ABC-DEF..." />
+        </div>
+        <div class="field">
+          <label for="tgChatId">Chat ID</label>
+          <input id="tgChatId" type="text" placeholder="مثال: 987654321" />
+        </div>
+        <div class="row-gap">
+          <button id="saveTgBtn" class="btn ghost" type="button">حفظ إعدادات Telegram</button>
+          <button id="testTgBtn" class="btn primary" type="button">إرسال رسالة اختبار</button>
+        </div>
+
+        <hr class="divider" />
+
+        <h3>حفظ الجلسة وتصدير التقارير</h3>
+        <div class="row-gap">
+          <button id="saveSessionBtn" class="btn ghost" type="button">حفظ الإعدادات</button>
+          <button id="exportJsonBtn" class="btn ghost" type="button">تصدير JSON</button>
+          <button id="exportCsvBtn" class="btn ghost" type="button">تصدير CSV</button>
+          <button id="exportTxtBtn" class="btn ghost" type="button">تصدير TXT</button>
+        </div>
+        <textarea id="exportPreview" class="export-area" rows="6" readonly placeholder="سيظهر التقرير هنا لنسخه أو تنزيله..."></textarea>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
